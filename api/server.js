@@ -22,4 +22,11 @@ server.use('/cities', citiesRouter)
 server.use('/manyToMany', manyToManyRouter)
 /* server.use('/manyToMany', manyToManyRouter) */
 
+server.get('/', (req, res) => {
+    res.send(`
+      <h2>API Is Running</h>
+      <p>Welcome to the API</p>
+    `);
+  });
+
 module.exports = server;
