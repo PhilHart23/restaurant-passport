@@ -2,7 +2,7 @@ const router = require("express").Router();
 const Cities = require("./cities-model");
 const { authenticate } = require("../users/restrict-middleware");
 
-router.get("/", authenticate, (req, res) => {
+router.get("/", (req, res) => {
   // pull from cities table - get a list of cities
   Cities.getCities()
     .then(cities => {
@@ -25,7 +25,7 @@ router.post("/", (req, res) => {
     });
 });
 
-router.post("/restaurants", authenticate, (req, res) => {
+router.post("/restaurants", (req, res) => {
   // posts to restaurants
   Cities.addRestaurant(req.body)
     .then(ids => {
@@ -36,7 +36,7 @@ router.post("/restaurants", authenticate, (req, res) => {
     });
 });
 
-router.get("/:id/restaurants", authenticate, (req, res) => {
+router.get("/:id/restaurants", (req, res) => {
   // object containing city with associated restaurants
   const { id } = req.params;
   Cities.getCityById(id).then(city => {
@@ -52,7 +52,7 @@ router.get("/:id/restaurants", authenticate, (req, res) => {
   });
 });
 
-router.get("/restaurants/:id", authenticate, (req, res) => {
+router.get("/restaurants/:id", (req, res) => {
   const id = req.params.id;
   Cities.getRestaurantById(id)
     .then(restaurant => {
